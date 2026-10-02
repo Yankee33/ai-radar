@@ -571,7 +571,34 @@
         </div>
       </th>`).join('');
     const row = (label, fn) => `<tr><th scope="row">${label}</th>${compare.map((r) => `<td>${fn(r)}</td>`).join('')}</tr>`;
+    const drCell = (r) => {
+      if (r.dr == null) return '—';
+      const best = multi && r.dr === maxDr;
+      return `<div class="dr-bar ${best ? 'best' : ''}"><b>${esc(r.dr)}${best ? '<span class="best-tag">Найвищий</span>' : ''}</b><div class="bar"><i style="--w:${Math.min(100, r.dr)}%"></i></div></div>`;
+    };
+    const nicheCell = (r) => nichesOf(r).length ? `<div class="chips-row">${nichesOf(r).map((c) => `<span class="chip">${esc(c)}</span>`).join('')}</div>` : '—';
+    const cards = compare.map((r) => `
+      <article class="cmp-card">
+        <header class="cmp-card__head">
+          ${tile(r.domain, 'tile--lg')}
+          <div class="cmp-card__id">
+            <a href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener noreferrer">${esc(r.domain)}</a>
+            <span>${esc(r.title || '—')}</span>
+          </div>
+          <button type="button" class="icon-btn" data-rm="${esc(r.domain)}" aria-label="Прибрати ${esc(r.domain)}">${icon('close')}</button>
+        </header>
+        <dl class="cmp-card__list">
+          <div><dt>Domain Rating</dt><dd>${drCell(r)}</dd></div>
+          <div><dt>Ніші</dt><dd>${nicheCell(r)}</dd></div>
+          <div><dt>Стек</dt><dd>${esc(String(r.ai_source || '—').replace(/^gen:/, ''))}</dd></div>
+          <div><dt>Live з</dt><dd>${esc(fmtDate(r.went_live))}</dd></div>
+          <div><dt>Домен</dt><dd>${esc(r.tld ? '.' + r.tld : '—')}</dd></div>
+          <div><dt>Сервер</dt><dd>${esc(r.webserver || '—')}</dd></div>
+          <div class="cmp-card__sum"><dt>Опис</dt><dd>${esc(r.ai_summary || '—')}</dd></div>
+        </dl>
+      </article>`).join('');
     box.innerHTML = `
+      <div class="cmp-cards">${cards}</div>
       <div class="cmp-wrap">
         <table class="cmp">
           <thead><tr><th></th>${th}</tr></thead>

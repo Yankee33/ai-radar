@@ -1,0 +1,2 @@
+# Проксі до freeserp.ai: запити йдуть на той самий домен, тому CORS не потрібен.
+/api/freeserp  https://freeserp.ai/api.php  200

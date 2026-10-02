@@ -399,6 +399,19 @@ table.cmp thead th:first-child { position: sticky; left: 0; background: var(--su
 .best-tag { margin-left: 8px; padding: 2px 8px; border-radius: 999px; background: var(--signal-soft); color: var(--signal); font-size: .74rem; font-weight: 600; vertical-align: 2px; }
 @keyframes grow { from { transform: scaleX(0); } }
 .cmp-actions { margin-top: 18px; }
+.cmp-cards { display: none; }
+.cmp-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-xl); box-shadow: var(--shadow-md); overflow: hidden; }
+.cmp-card__head { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 16px; border-bottom: 1px solid var(--line); }
+.cmp-card__id { display: grid; gap: 2px; min-width: 0; }
+.cmp-card__id a { font-weight: 600; font-size: 1.05rem; color: var(--text); text-decoration: none; overflow-wrap: anywhere; }
+.cmp-card__id span { color: var(--muted); font-size: .86rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cmp-card__list { margin: 0; padding: 4px 16px 8px; }
+.cmp-card__list > div { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: .92rem; }
+.cmp-card__list > div:last-child { border-bottom: 0; }
+.cmp-card__list dt { color: var(--muted); }
+.cmp-card__list dd { margin: 0; overflow-wrap: anywhere; }
+.cmp-card__sum { grid-template-columns: 1fr !important; gap: 6px !important; }
+.cmp-card__sum dd { color: var(--muted); line-height: 1.55; }
 
 /* ---------- Панель вибраних ---------- */
 .tray {
@@ -505,7 +518,10 @@ table.cmp thead th:first-child { position: sticky; left: 0; background: var(--su
   .controls { gap: 16px; }
   .ctl { min-width: 100%; }
   .defs > div { grid-template-columns: 1fr; gap: 4px; }
-  .tray { width: calc(100% - 24px); justify-content: space-between; gap: 10px; bottom: 12px; }
+  .cmp-cards { display: grid; gap: 14px; }
+  .cmp-wrap { display: none; }
+  .tray { width: calc(100% - 24px); justify-content: space-between; gap: 10px; bottom: 64px; }
+  .foot { padding-bottom: 76px; }
   .tray__text { overflow: hidden; text-overflow: ellipsis; }
 }
 @media (max-width: 480px) {
